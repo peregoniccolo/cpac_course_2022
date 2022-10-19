@@ -14,12 +14,12 @@ void draw(){
     //tint(255,mouseX,mouseY);
     image(img,0,0,width,height);    
  
-    
-    // This works on the original image but do not affects the original image
+    // This works on the original image
+    // get(x, y, w, h);
     for (int y=0;y<height/2;y++){
       for (int x=0;x<width;x++){
         color c = get(x, y); 
-        set(x,y,c+100);
+        set(x,y,0); // image transformation will not modify the image but only what is displayed
       }
     }
     
@@ -27,13 +27,11 @@ void draw(){
     //From Matrix to 1D-arrayù
     // This works on the displayed screeen
     
-    /*
-    img.loadPixels();       //Loads the pixel data of the current display window into the img.pixels[]
-    //The way to access to pixels[] is pixels[y*width+x];
-    for (int i = 0; i < ((height/2)*width); i++) {
-    //for (int i = 0; i < (height*width); i++) {
-      color c = img.pixels[i];
-      img.pixels[i] = c+100; 
-    }
-    img.updatePixels();*/
+    //img.loadPixels();
+    ////The way to access to pixels[] is pixels[y*width+x];
+    //for (int i = 0; i < ((height/2)*width); i++) {
+    //  color c = img.pixels[i]; // vectorized matrix of pixels
+    //  img.pixels[i] = c+100; 
+    //}
+    //img.updatePixels(); // load modified image on the screen
 }
