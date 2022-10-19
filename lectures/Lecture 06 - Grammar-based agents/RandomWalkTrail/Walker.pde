@@ -27,6 +27,7 @@ class Walker {
 
   // Randomly move up, down, left, right, or stay in one place
   void walk() {
+    // for each draw produce random values
     PVector vel = new PVector(random(-8, 8), random(-8, 8));
     location.add(vel);
 

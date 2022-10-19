@@ -104,7 +104,7 @@ class Boid {
     for (Boid other : boids) {
       float d = PVector.dist(location,other.location);
       if ((d > 0) && (d < align_neighbordist)) {
-        sum.add(other.velocity);
+        sum.add(other.velocity); // we average the velocity
         count++;
       }
     }

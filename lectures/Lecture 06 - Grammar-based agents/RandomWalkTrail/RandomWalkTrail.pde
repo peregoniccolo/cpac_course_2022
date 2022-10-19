@@ -1,3 +1,4 @@
+
 // Random Walker (No Vectors)
 // Daniel Shiffman <http://www.shiffman.net>
 // The Nature of Code
@@ -19,6 +20,3 @@ void draw() {
   w.walk();
   w.display();
 }
-
-
-

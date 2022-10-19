@@ -35,7 +35,7 @@ void draw () {
   }
   
   if (mousePressed) {
-    attractor.lock();
+    attractor.lock(); // lock a specific particle and then moving
     attractor.set(mouseX,mouseY);
   } else {
     attractor.unlock();

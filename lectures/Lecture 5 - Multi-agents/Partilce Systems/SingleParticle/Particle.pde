@@ -8,8 +8,8 @@ class Particle {
   float mass;
 
   Particle(PVector l) {
-    acceleration = new PVector(0, 0.05);
-    velocity = new PVector(random(-1, 1), random(-1, 0));
+    acceleration = new PVector(0, 0.05); // gravity
+    velocity = new PVector(random(-1, 1), random(-1, 0)); // random direction behavior
     location = l.get();
     lifespan = 255.0;
     mass = 1;
@@ -33,8 +33,8 @@ class Particle {
   }
 
   // Method to display
-  void render() {
-    stroke(0, lifespan);
+  void display() {
+    stroke(0, lifespan); // lifespan used as alpha value, 255 -> 0 becoming more transparent
     strokeWeight(2);
     fill(127, lifespan);
     ellipse(location.x, location.y, 12, 12);
