@@ -18,8 +18,9 @@ void setup() {
   filenames = getFilenames();
 }
 void mousePressed() {
- if(mouseButton==LEFT){
-   ; 
+ if(mouseButton==LEFT){//insert a new boid
+    Boid b = new Boid(P2W(mouseX, mouseY));
+    boids.add(b);     
   }
   if(mouseButton==RIGHT){ 
     ;

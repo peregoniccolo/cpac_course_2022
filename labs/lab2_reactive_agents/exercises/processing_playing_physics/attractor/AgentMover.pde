@@ -18,14 +18,14 @@ class AgentMover{
   void update(){    
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
-    this.acceleration.mult(0);
+    this.acceleration.mult(0); // reset acceleration
   }
   void computeEffect(float dist){
-    /*your code here */
+    this.cutoff = map(dist, dist_min, dist_max, 0, 1);
   }
   void applyForce(PVector force){    
     PVector f = force.copy();
-    f.div(this.mass);
+    f.div(this.mass); // to get the acceleration
     this.acceleration.add(f);
     
   }

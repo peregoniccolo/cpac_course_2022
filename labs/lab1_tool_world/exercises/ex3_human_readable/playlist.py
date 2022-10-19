@@ -38,7 +38,8 @@ for id_ in ids:
     assert req.status_code==200, req.content
     audio_features_song=req.json()["audio_features"][0]
     audio_features.append(audio_features_song)
-    time.sleep(1) # wait 1 second between the questions
+    time.sleep(1)   # wait 1 second between the questions
+                    # otherwise we could have too many requests each second
 # %% Now let's create some way to organize them!
 
 shuffled_songs=your_code.sort_songs(audio_features)

@@ -6,8 +6,22 @@ float compute_flatness(){
   return random(3);
 }
 
-float compute_centroid(){
-    return random(3);
+float compute_centroid(FFT fft, float[] freqs, int K){  
+  float num = 0, den = 0, X_k, f_k;
+  
+  for (int k = 0; k < K; k++) {
+    // at each iteration, each freq bin is summed
+    X_k = fft.getBand(k);
+    f_k = freqs[k];
+    
+    num += f_k*X_k;
+    den += X_k;
+  }
+  
+  float centroid = num/ (den+0.00001); // to avoid division by 0
+  // if we want to have 1 as a result, add the delta at num
+  
+  return centroid;
 }
 
 float compute_spread(){
@@ -22,9 +36,17 @@ float compute_entropy(){
   return random(3);
 }
 
-float compute_energy() {    
-
-  return random(3);
+float compute_energy(FFT fft, int K) {    
+  float energy = 0;
+  float X_k;
+  
+  for (int k = 0; k < K; k++) {
+    // at each iteration, each freq bin is summed
+    X_k = fft.getBand(k);
+    energy = energy + X_k*X_k;
+  }
+  
+  return energy;
 }
 class AgentFeature { 
   float sampleRate;
@@ -48,7 +70,7 @@ class AgentFeature {
     this.K=this.fft.specSize();
     this.beat = new BeatDetect();
     
-    this.lambda_smooth = 0.1;
+    this.lambda_smooth = 0.5;
     this.freqs=new float[this.K];
     for(int k=0; k<this.K; k++){
       this.freqs[k]= (0.5*k/this.K)*sampleRate;
@@ -62,20 +84,22 @@ class AgentFeature {
     this.entropy=0;
     this.energy=0;
   }
+  
   float smooth_filter(float old_value, float new_value){
     /* Try to implement a smoothing filter using this.lambda_smooth*/
-    return new_value;
+    return this.lambda_smooth*new_value + (1-this.lambda_smooth*old_value);
     
   }
+  
   void reasoning(AudioBuffer mix){
      this.fft.forward(mix);
      this.beat.detect(mix);
-     float centroid = compute_centroid();
+     float centroid = compute_centroid(this.fft, this.freqs, this.K);
      float flatness = compute_flatness();
      float spread = compute_spread();                                  
      float skewness= compute_skewness();
      float entropy = compute_entropy();     
-     float energy = compute_energy();
+     float energy = compute_energy(this.fft, this.K);
      
      this.centroid = centroid;    
      this.energy = this.smooth_filter(this.energy, energy);

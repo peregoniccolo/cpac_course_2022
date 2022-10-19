@@ -5,6 +5,7 @@ OscP5 oscP5;
 NetAddress ip_port;
 
 AgentMover mover;
+float g = 6.67428 * pow(10,-11);
 int MASS_TO_PIXEL=10;
 float mass_mover = 10;
 float mass_attractor;
@@ -26,8 +27,13 @@ void setup(){
 
 PVector computeGravityForce(AgentMover mover){
   PVector attr_force;
-  attr_force=new PVector(1,1);
-  /* your code here */
+  
+  /* compute attractive force */
+  PVector distVec = PVector.sub(pos_attractor, mover.position);
+  dist= distVec.mag();
+  dist = constrain(dist, dist_min, dist_max);
+  attr_force = ( distVec.div(dist) ).mult(g*mass_mover*mass_attractor/distVec.magSq()).normalize();
+
   return attr_force;
 }
 void sendEffect(float cutoff, float vibrato){

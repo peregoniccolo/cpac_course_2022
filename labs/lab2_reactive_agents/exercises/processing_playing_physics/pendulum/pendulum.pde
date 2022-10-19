@@ -17,7 +17,9 @@ void setup(){
 }
 float computeForce(AgentPendulum pendulum){
    float force=0;
-   /* your code here*/
+   
+   force = -G*pendulum.mass*sin(pendulum.angle)/pendulum.r;
+   
    return force;
 }
 

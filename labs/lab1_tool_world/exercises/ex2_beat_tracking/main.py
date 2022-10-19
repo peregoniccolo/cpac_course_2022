@@ -3,7 +3,7 @@
 import numpy as np
 import os
 import librosa
-from librosa import  load
+from librosa import load
 import soundfile as sf
 import matplotlib.pyplot as plt
 
@@ -13,8 +13,9 @@ import your_code
 
 DATA_DIR="../../../../data"
 assert os.path.exists(DATA_DIR), "wrong data dir"
+
 # %% Define filenames
-filename_in=os.path.join(DATA_DIR, "tire_swings.wav") # put whatever you like
+filename_in=os.path.join(DATA_DIR, "tire_swings.wav") # put what ever you like
 filename_kick=os.path.join(DATA_DIR, "kick.wav") # put whatever you like
 filename_out=os.path.join(DATA_DIR, "tire_disco.wav") # 
 
@@ -24,6 +25,7 @@ SR=16000
 y, sr = load(filename_in, sr=SR)
  #your code here
 # %% 2) Find the beats
+# given and audio file and the beats, create new audio with kick on the beats
 beats=your_code.compute_beats(y, sr=SR)
 
 # %% See if beats are correct

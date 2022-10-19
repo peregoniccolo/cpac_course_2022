@@ -17,14 +17,15 @@ class ParticleSystem{
     float small_force=0.05;
     for(int i=this.particles.size()-1; i>=0; i--){
       p=this.particles.get(i);
-      /* your code here*/
+      /* apply small force */
+      p.applyForce(new PVector(random(-small_force, small_force), random(-small_force, small_force)));
+      p.update();
       p.draw();
       p.lifespan-=0.5;
       if(p.isDead()){
          particles.remove(i);
          this.addParticle();
       }
-    
     }
   }
 
