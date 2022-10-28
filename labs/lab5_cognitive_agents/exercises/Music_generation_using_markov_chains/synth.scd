@@ -6,7 +6,7 @@ s.boot
 
 // Following two lines to change supercollider
 ServerOptions.outDevices;
-s.options.outDevice_('Scarlett 2i2 USB');
+s.options.outDevice_('Altoparlanti MacBook Pro');
 
 
 
@@ -68,6 +68,8 @@ x = OSCFunc( { | msg, time, addr, port |
 
 }, '/synth_control' );
 )
+
+{ SinOsc.ar }.play;
 
 
 // Close OSC function

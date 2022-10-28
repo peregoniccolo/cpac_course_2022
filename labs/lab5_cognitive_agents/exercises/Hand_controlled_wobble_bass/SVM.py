@@ -53,10 +53,13 @@ def train_svm():
 	class_names = ['a', 'b']
 
 	images, images_vector, labels = load_data(class_a_path='images/class_a/', class_b_path='images/class_b/')
+	# images become a vector
 
 	pca = PCA(n_components=150, svd_solver='randomized', whiten=True, random_state=42)
+	# perform pca with 150 components
+	# dimensionality reduction to 150 elements vector and feed it to the svm
 	svc = SVC(kernel='rbf', class_weight='balanced')
-	#model = # FILL THE CODE
+	model = make_pipeline(pca, svc)
 
 	with warnings.catch_warnings():
 		# ignore all caught warnings
@@ -65,10 +68,10 @@ def train_svm():
 		xtrain, xtest, ytrain, ytest = train_test_split(images_vector, labels, random_state=42)
 
 	param_grid = {'svc__C': [1, 5, 10, 50], 'svc__gamma': [0.0001, 0.0005, 0.001, 0.005]}
-	grid = GridSearchCV(model, param_grid)
+	grid = GridSearchCV(model, param_grid) # svg parameter, we train for each one and see which one is best
 
 	print('Fit the SVM model')
-	# FILL THE CODE
+	grid.fit(xtrain, ytrain)
 
 	print(grid.best_params_)
 
